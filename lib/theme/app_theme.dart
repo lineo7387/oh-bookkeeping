@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Defines the overall theme and colors for the application.
 class AppTheme {
   static const Color seedColor = Color(0xFF6750A4);
   static const Color background = Color(0xFFFFFBFE);
