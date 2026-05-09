@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'theme/app_theme.dart';
+import 'theme/widgets/atmospheric_background.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -12,11 +14,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Bookkeeping App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF6750A4)),
-        useMaterial3: true,
+      theme: AppTheme.lightTheme,
+      home: Scaffold(
+        body: AtmosphericBackground(
+          child: const Center(child: Text('Theme Applied')),
+        ),
       ),
-      home: const Scaffold(body: Center(child: Text('App Setup Complete'))),
     );
   }
 }

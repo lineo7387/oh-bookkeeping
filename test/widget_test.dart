@@ -11,11 +11,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_application_1/main.dart';
 
 void main() {
-  testWidgets('App Setup Complete smoke test', (WidgetTester tester) async {
+  testWidgets('Theme Applied smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const ProviderScope(child: MyApp()));
 
     // Verify that our app shows the initial text.
-    expect(find.text('App Setup Complete'), findsOneWidget);
+    expect(find.text('Theme Applied'), findsOneWidget);
   });
 }
