@@ -10,20 +10,40 @@ class AtmosphericBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      fit: StackFit.expand, // Force stack to fill the screen
       children: [
+        // Top right primary glow
         Positioned(
-          top: -100,
-          right: -100,
+          top: -50,
+          right: -50,
           child: ImageFiltered(
-            imageFilter: ImageFilter.blur(sigmaX: 64, sigmaY: 64),
+            imageFilter: ImageFilter.blur(sigmaX: 80, sigmaY: 80),
             child: Container(
               width: 300,
               height: 300,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Theme.of(
-                  context,
-                ).colorScheme.primary.withValues(alpha: 0.1),
+                color: Theme.of(context).colorScheme.primary.withValues(
+                  alpha: 0.4,
+                ), // Higher opacity for visibility
+              ),
+            ),
+          ),
+        ),
+        // Bottom left secondary glow
+        Positioned(
+          bottom: -100,
+          left: -50,
+          child: ImageFiltered(
+            imageFilter: ImageFilter.blur(sigmaX: 80, sigmaY: 80),
+            child: Container(
+              width: 250,
+              height: 250,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Theme.of(context).colorScheme.tertiary.withValues(
+                  alpha: 0.4,
+                ), // Higher opacity for visibility
               ),
             ),
           ),
