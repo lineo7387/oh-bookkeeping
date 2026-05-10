@@ -1,5 +1,5 @@
 # TodoWrite
-- [ ] Implement Task 4.1: Create `lib/features/transactions/views/home_page.dart` (Implementation Subagent)
-- [ ] Implement Task 4.2: Update `lib/main.dart` to use `HomePage` (Implementation Subagent)
-- [ ] Implement Task 4.3: Spec Compliance Review (Spec Reviewer Subagent)
-- [ ] Implement Task 4.4: Code Quality Review (Code Quality Reviewer Subagent)
+- [ ] Implement Task 5.1: Create `lib/features/transactions/views/widgets/add_transaction_sheet.dart` (Implementation Subagent)
+- [ ] Implement Task 5.2: Connect FAB in `lib/features/transactions/views/home_page.dart` to open the BottomSheet (Implementation Subagent)
+- [ ] Implement Task 5.3: Spec Compliance Review (Spec Reviewer Subagent)
+- [ ] Implement Task 5.4: Code Quality Review (Code Quality Reviewer Subagent)
