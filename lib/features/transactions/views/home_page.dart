@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_application_1/features/transactions/providers/transaction_provider.dart';
 import 'package:flutter_application_1/features/transactions/models/transaction.dart';
 import 'package:flutter_application_1/theme/widgets/atmospheric_background.dart';
+import 'widgets/add_transaction_sheet.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -85,7 +86,11 @@ class HomePage extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // TODO: Open BottomSheet
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            builder: (context) => const AddTransactionSheet(),
+          );
         },
         child: const Icon(Icons.add),
       ),
