@@ -1,5 +1,7 @@
 # TodoWrite
-- [ ] Implement Task 5.1: Create `lib/features/transactions/views/widgets/add_transaction_sheet.dart` (Implementation Subagent)
-- [ ] Implement Task 5.2: Connect FAB in `lib/features/transactions/views/home_page.dart` to open the BottomSheet (Implementation Subagent)
-- [ ] Implement Task 5.3: Spec Compliance Review (Spec Reviewer Subagent)
-- [ ] Implement Task 5.4: Code Quality Review (Code Quality Reviewer Subagent)
+- [ ] Task 1.1: Add `fl_chart` to `pubspec.yaml`
+- [ ] Task 1.2: Run `flutter pub get`
+- [ ] Task 2.1: Implement `categorySummaryProvider` in `lib/features/transactions/providers/analytics_provider.dart`
+- [ ] Task 3.1: Create `lib/features/transactions/views/analytics_page.dart`
+- [ ] Task 4.1: Integrate `AnalyticsPage` into `HomePage`
+- [ ] Task 5: Final Review & Integration
