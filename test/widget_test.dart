@@ -16,6 +16,6 @@ void main() {
     await tester.pumpWidget(const ProviderScope(child: MyApp()));
 
     // Verify that our app shows the initial text.
-    expect(find.text('Theme Applied'), findsOneWidget);
+    expect(find.text('Total Balance'), findsOneWidget);
   });
 }
