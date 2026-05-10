@@ -60,16 +60,22 @@ class AnalyticsPage extends ConsumerWidget {
                                   final index = summary.entries
                                       .toList()
                                       .indexOf(entry);
+                                  final total = summary.values.reduce(
+                                    (a, b) => a + b,
+                                  );
+                                  final percentage = (entry.value / total * 100)
+                                      .toInt();
                                   return PieChartSectionData(
                                     value: entry.value,
-                                    title: '',
+                                    title: '$percentage%',
+                                    titleStyle: theme.textTheme.labelSmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          color: colorScheme.onPrimary,
+                                        ),
                                     color: colors[index % colors.length]
                                         .withValues(alpha: 0.8),
-                                    radius: 40,
-                                    borderSide: BorderSide(
-                                      color: colorScheme.surfaceContainer,
-                                      width: 0,
-                                    ),
+                                    radius: 50,
                                   );
                                 }).toList(),
                               ),
