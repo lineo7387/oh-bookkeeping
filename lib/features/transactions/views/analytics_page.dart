@@ -46,10 +46,7 @@ class AnalyticsPage extends ConsumerWidget {
                       const SizedBox(height: 24),
                       Card(
                         elevation: 0,
-                        color: colorScheme.surfaceContainer,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(28),
-                        ),
+                        color: Colors.transparent,
                         child: Padding(
                           padding: const EdgeInsets.all(24),
                           child: SizedBox(
@@ -71,7 +68,7 @@ class AnalyticsPage extends ConsumerWidget {
                                     radius: 40,
                                     borderSide: BorderSide(
                                       color: colorScheme.surfaceContainer,
-                                      width: 2,
+                                      width: 0,
                                     ),
                                   );
                                 }).toList(),
