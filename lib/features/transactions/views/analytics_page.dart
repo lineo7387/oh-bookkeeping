@@ -10,94 +10,131 @@ class AnalyticsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final summary = ref.watch(categorySummaryProvider);
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     final colors = [
-      Theme.of(context).colorScheme.primary,
-      Theme.of(context).colorScheme.secondary,
-      Theme.of(context).colorScheme.tertiary,
-      Theme.of(context).colorScheme.inversePrimary,
+      colorScheme.primary,
+      colorScheme.secondary,
+      colorScheme.tertiary,
+      colorScheme.inversePrimary,
     ];
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: const Text('Spending Insights'),
+        title: Text('Insights', style: theme.textTheme.headlineSmall),
         backgroundColor: Colors.transparent,
         elevation: 0,
+        centerTitle: true,
       ),
-      extendBodyBehindAppBar: true,
       body: AtmosphericBackground(
         child: SafeArea(
           child: summary.isEmpty
-              ? const Center(child: Text('No data available'))
+              ? Center(
+                  child: Text('No data yet', style: theme.textTheme.bodyLarge),
+                )
               : SingleChildScrollView(
-                  padding: const EdgeInsets.all(24.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 16,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      _buildTimeSelector(context),
+                      const SizedBox(height: 24),
                       Card(
                         elevation: 0,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .surfaceContainerHighest
-                            .withValues(alpha: 0.5),
-                        child: SizedBox(
-                          height: 300,
-                          child: PieChart(
-                            PieChartData(
-                              sectionsSpace: 4,
-                              centerSpaceRadius: 60,
-                              sections: summary.entries.map((entry) {
-                                final index = summary.entries.toList().indexOf(
-                                  entry,
-                                );
-                                return PieChartSectionData(
-                                  value: entry.value,
-                                  title:
-                                      '${(entry.value / summary.values.reduce((a, b) => a + b) * 100).toInt()}%',
-                                  color: colors[index % colors.length],
-                                  radius: 50,
-                                  titleStyle: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                );
-                              }).toList(),
+                        color: colorScheme.surfaceContainer,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(28),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(24),
+                          child: SizedBox(
+                            height: 240,
+                            child: PieChart(
+                              PieChartData(
+                                sectionsSpace: 4,
+                                centerSpaceRadius: 60,
+                                sections: summary.entries.map((entry) {
+                                  final index = summary.entries
+                                      .toList()
+                                      .indexOf(entry);
+                                  return PieChartSectionData(
+                                    value: entry.value,
+                                    title:
+                                        '${(entry.value / summary.values.reduce((a, b) => a + b) * 100).toInt()}%',
+                                    color: colors[index % colors.length],
+                                    radius: 60,
+                                    titleStyle: theme.textTheme.labelMedium
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          color: colorScheme.onPrimary,
+                                        ),
+                                  );
+                                }).toList(),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 24),
-                      Text(
-                        'Breakdown',
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
+                      const SizedBox(height: 32),
+                      Text('Breakdown', style: theme.textTheme.headlineSmall),
                       const SizedBox(height: 16),
                       ...summary.entries.map((entry) {
                         final index = summary.entries.toList().indexOf(entry);
-                        return Card(
-                          margin: const EdgeInsets.only(bottom: 12),
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.circle,
-                              color: colors[index % colors.length],
-                            ),
-                            title: Text(
-                              entry.key,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            trailing: Text(
-                              '\$${entry.value.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
+                        return _buildCategoryItem(
+                          context,
+                          entry,
+                          colors[index % colors.length],
                         );
                       }),
                     ],
                   ),
                 ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTimeSelector(BuildContext context) {
+    return Center(
+      child: SegmentedButton<String>(
+        segments: const [
+          ButtonSegment(value: 'week', label: Text('Week')),
+          ButtonSegment(value: 'month', label: Text('Month')),
+          ButtonSegment(value: 'year', label: Text('Year')),
+        ],
+        selected: const {'month'},
+        onSelectionChanged: (value) {},
+      ),
+    );
+  }
+
+  Widget _buildCategoryItem(
+    BuildContext context,
+    MapEntry<String, double> entry,
+    Color color,
+  ) {
+    return Card(
+      elevation: 0,
+      margin: const EdgeInsets.only(bottom: 12),
+      color: Theme.of(context).colorScheme.surfaceContainerLow,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: ListTile(
+        leading: Icon(Icons.category_rounded, color: color),
+        title: Text(
+          entry.key,
+          style: const TextStyle(fontWeight: FontWeight.w600),
+        ),
+        trailing: Text(
+          '\$${entry.value.toStringAsFixed(2)}',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
         ),
       ),
     );
