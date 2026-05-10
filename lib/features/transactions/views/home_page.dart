@@ -4,6 +4,7 @@ import 'package:flutter_application_1/features/transactions/providers/transactio
 import 'package:flutter_application_1/features/transactions/models/transaction.dart';
 import 'package:flutter_application_1/theme/widgets/atmospheric_background.dart';
 import 'widgets/add_transaction_sheet.dart';
+import 'analytics_page.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -19,6 +20,20 @@ class HomePage extends ConsumerWidget {
     );
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Transactions'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.analytics),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AnalyticsPage()),
+              );
+            },
+          ),
+        ],
+      ),
       body: AtmosphericBackground(
         child: SafeArea(
           child: Column(
