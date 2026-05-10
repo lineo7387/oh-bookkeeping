@@ -56,23 +56,23 @@ class AnalyticsPage extends ConsumerWidget {
                             height: 240,
                             child: PieChart(
                               PieChartData(
-                                sectionsSpace: 4,
-                                centerSpaceRadius: 60,
+                                pieTouchData: PieTouchData(enabled: true),
+                                sectionsSpace: 8,
+                                centerSpaceRadius: 70,
                                 sections: summary.entries.map((entry) {
                                   final index = summary.entries
                                       .toList()
                                       .indexOf(entry);
                                   return PieChartSectionData(
                                     value: entry.value,
-                                    title:
-                                        '${(entry.value / summary.values.reduce((a, b) => a + b) * 100).toInt()}%',
-                                    color: colors[index % colors.length],
-                                    radius: 60,
-                                    titleStyle: theme.textTheme.labelMedium
-                                        ?.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          color: colorScheme.onPrimary,
-                                        ),
+                                    title: '',
+                                    color: colors[index % colors.length]
+                                        .withValues(alpha: 0.8),
+                                    radius: 40,
+                                    borderSide: BorderSide(
+                                      color: colorScheme.surfaceContainer,
+                                      width: 2,
+                                    ),
                                   );
                                 }).toList(),
                               ),
